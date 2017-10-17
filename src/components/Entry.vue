@@ -4,11 +4,13 @@
     <links-view :links="links"></links-view>
     <b-button-group class="mngbtn">
       <b-button variant="info">Refresh Links</b-button>
-      <b-button variant="primary">Add UDP</b-button>
-      <b-button variant="primary">Add Serial</b-button>
+      <b-button v-b-modal.modaludp variant="primary">Add UDP</b-button>
       <b-button variant="danger">Stop Routing</b-button>
       <b-button variant="success">Start Routing</b-button>
   </b-button-group>
+
+  <add-link></add-link>
+
   </div>
 </template>
 
@@ -16,10 +18,11 @@
 
 import axios from 'axios'
 import LinksView from '@/components/LinksView'
+import AddLink from '@/components/AddLink'
 
 export default {
   name: 'Entry',
-  components: { LinksView },
+  components: { LinksView, AddLink },
   data () {
     return {
       links: []
@@ -60,3 +63,5 @@ a {
     padding-top: 10px;
     }
 </style>
+
+    methods: {
