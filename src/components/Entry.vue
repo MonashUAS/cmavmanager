@@ -1,6 +1,14 @@
 <template>
   <div class="entry">
+    <h2>Links</h2>
     <links-view :links="links"></links-view>
+    <b-button-group class="mngbtn">
+      <b-button variant="info">Refresh Links</b-button>
+      <b-button variant="primary">Add UDP</b-button>
+      <b-button variant="primary">Add Serial</b-button>
+      <b-button variant="danger">Stop Routing</b-button>
+      <b-button variant="success">Start Routing</b-button>
+  </b-button-group>
   </div>
 </template>
 
@@ -21,10 +29,8 @@ export default {
     var vm = this
     axios.get('http://localhost:8000/links')
     .then(function (response) {
-      // vm.links = response.data
-      vm.links = [{id: 1, name: 'hello world'},
-                  {id: 2, name: 'fuck it'}]
-      console.log(response.data)
+      vm.links = response.data.links
+      console.log(vm.links)
     })
   }
 }
@@ -49,4 +55,8 @@ li {
 a {
   color: #42b983;
 }
+
+.mngbtn {
+    padding-top: 10px;
+    }
 </style>

@@ -1,7 +1,5 @@
 <template>
   <footer>
-   <span> Build with <a href="https://vuejs.org/">Vue.js</a> and <a href="http://vue-chartjs.org/#/">vue-chartjs</a></span>
-   <span>For issues or feature requests visit <a href="https://github.com/apertureless/npm-stats">Github</a></span>
   </footer>
 </template>
 

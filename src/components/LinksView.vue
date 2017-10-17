@@ -1,13 +1,19 @@
 <template>
-  <ul>
-    <li v-for="link in links">Hello {{ link.id }} {{ link.name }}</li>
-  </ul>
+  <div class="link-con">
+  <b-list-group>
+    <link-display v-for="link in links" :link="link">
+    </link-display>
+  </b-list-group>
+  </div>
 </template>
 
 <script>
 
+import LinkDisplay from '@/components/LinkDisplay'
+
 export default {
   name: 'LinksView',
+  components: { LinkDisplay },
   props: {
     links: {
       type: Array
@@ -21,4 +27,8 @@ export default {
 </script>
 
 <style scoped>
+  .link-con {
+  width: 75%;
+  margin: auto;
+  }
 </style>
