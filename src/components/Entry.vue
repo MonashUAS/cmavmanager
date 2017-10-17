@@ -3,7 +3,7 @@
     <h2>Links</h2>
     <links-view :links="links"></links-view>
     <b-button-group class="mngbtn">
-      <b-button variant="info">Refresh Links</b-button>
+      <b-button v-on:click="getLinks" variant="info">Refresh Links</b-button>
       <b-button v-b-modal.modaludp variant="primary">Add UDP</b-button>
       <b-button variant="danger">Stop Routing</b-button>
       <b-button variant="success">Start Routing</b-button>
@@ -29,12 +29,17 @@ export default {
     }
   },
   created: function () {
-    var vm = this
-    axios.get('http://localhost:8000/links')
-    .then(function (response) {
-      vm.links = response.data.links
-      console.log(vm.links)
-    })
+    this.getLinks()
+  },
+  methods: {
+    getLinks: function () {
+      var vm = this
+      axios.get('http://localhost:8000/links')
+      .then(function (response) {
+        vm.links = response.data.links
+        console.log(vm.links)
+      })
+    }
   }
 }
 </script>

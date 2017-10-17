@@ -9,7 +9,7 @@
           <b-btn v-b-toggle.collapse1 variant="primary">View Stats</b-btn>
           <b-dropdown id="ddown" text="Actions" variant="primary" class="m-md-2">
               <b-dropdown-item>Edit</b-dropdown-item>
-              <b-dropdown-item>Delete</b-dropdown-item>
+              <b-dropdown-item  v-on:click="deleteLink">Delete</b-dropdown-item>
             </b-dropdown>
         </div>
       </div>
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 
 export default {
   name: 'LinkDisplay',
@@ -33,6 +34,15 @@ export default {
   created: function () {
     console.log('In LinksDisplay now')
     console.log(this.link)
+  },
+  methods: {
+    deleteLink: function () {
+      console.log('deleteing this link')
+      axios.delete('http://localhost:8000/links/' + this.link.id)
+      .then(function (response) {
+        console.log('link deleted')
+      })
+    }
   }
 }
 </script>
