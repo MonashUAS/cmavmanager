@@ -1,8 +1,12 @@
 <template>
     <b-list-group-item>
       <div class="wrapperlink">
-        <div class="llink">
-        Link# {{ link.id }} Name: {{ link.link_options.link_name }}
+        <div v-if="link.udp_properties" class="llink">
+        <p><strong>Link#</strong> {{ link.id }} <strong>Name:</strong> {{ link.link_options.link_name }}</p>
+        <p><strong>Host:</strong> {{ link.udp_properties.host }} <strong>Host Port:</strong> {{ link.udp_properties.hostport }} <strong>Bind Port:</strong> {{ link.udp_properties.bindport }}</p>
+        </div>
+        <div v-if="link.serial_properties" class="llink">
+        Serial Link# {{ link.id }} Name: {{ link.link_options.link_name }}
         </div>
 
         <div class="rlink">
@@ -59,5 +63,10 @@ export default {
 
   #ddown {
   padding-top: 0px;
+  }
+
+  #card {
+      width: auto;
+      display: block
   }
 </style>

@@ -5,8 +5,8 @@
     <b-button-group class="mngbtn">
       <b-button v-on:click="getLinks" variant="info">Refresh Links</b-button>
       <b-button v-b-modal.modaludp variant="primary">Add UDP</b-button>
-      <b-button variant="danger">Stop Routing</b-button>
-      <b-button variant="success">Start Routing</b-button>
+      <b-button variant="danger">Save to File</b-button>
+      <b-button variant="success">Load from File</b-button>
   </b-button-group>
 
   <add-link></add-link>
