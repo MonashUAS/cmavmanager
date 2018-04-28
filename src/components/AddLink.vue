@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <b-modal v-on:ok="hok" v-on:show="hopen" size="lg" id="modaludp" title="Add UDP">
       <b-form>
         <b-form-group id="linkname"
@@ -35,6 +34,13 @@
         </b-form-select>
         </b-form-group>
       </b-form>
+      <b-btn v-b-toggle.defs variant="primary">Load Defaults</b-btn>
+      <b-collapse id="defs">
+        <b-card>
+          <b-button v-on:click="loadsitl">SITL</b-button>
+          <b-button v-on:click="loadgcs">GCS</b-button>
+        </b-card>
+      </b-collapse>
     </b-modal>
     </div>
 </template>
@@ -58,12 +64,12 @@ export default {
         }
       },
       udptypeoptions: [
-          { value: null, text: 'Please select UDP Type' },
-          { value: '0', text: 'Fully Defined' },
-          { value: '1', text: 'Client' },
-          { value: '2', text: 'Server' },
-          { value: '3', text: 'Broadcast Lock' },
-          { value: '4', text: 'Broadcast Unlock' }
+        { value: null, text: 'Please select UDP Type' },
+        { value: '0', text: 'Fully Defined' },
+        { value: '1', text: 'Client' },
+        { value: '2', text: 'Server' },
+        { value: '3', text: 'Broadcast Lock' },
+        { value: '4', text: 'Broadcast Unlock' }
       ]
     }
   },
@@ -82,12 +88,25 @@ export default {
       if (event) {
         console.log('Adding UDP Link')
         console.log(JSON.stringify(this.form))
-
         axios.post('http://localhost:8000/links', this.form)
-            .then(function (response) {
-              console.log('seems to have worked')
-            })
+          .then(function (response) {
+            console.log('seems to have worked')
+          })
       }
+    },
+    loadsitl: function (event) {
+      this.form.link_options.link_name = 'SITL'
+      this.form.udp_properties.host = '127.0.0.1'
+      this.form.udp_properties.hostport = '14552'
+      this.form.udp_properties.bindport = '14550'
+      this.form.udp_properties.udp_type = '0'
+    },
+    loadgcs: function (event) {
+      this.form.link_options.link_name = 'GCS'
+      this.form.udp_properties.host = '127.0.0.1'
+      this.form.udp_properties.hostport = '14555'
+      this.form.udp_properties.bindport = ''
+      this.form.udp_properties.udp_type = '1'
     }
   }
 }
