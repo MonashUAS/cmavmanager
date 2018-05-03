@@ -10,14 +10,14 @@
         </div>
 
         <div class="rlink">
-          <b-btn v-b-toggle.collapse1 variant="primary">View Stats</b-btn>
+          <b-btn v-b-toggle="collapseid" variant="primary">View Stats</b-btn>
           <b-dropdown id="ddown" text="Actions" variant="primary" class="m-md-2">
               <b-dropdown-item>Edit</b-dropdown-item>
               <b-dropdown-item  v-on:click="deleteLink">Delete</b-dropdown-item>
             </b-dropdown>
         </div>
       </div>
-      <b-collapse id="collapse1" class="mt-2">
+      <b-collapse :id="collapseid" class="mt-2">
         <b-card>
           <p class="card-text">Stats Will Go Here</p>
         </b-card>
@@ -29,6 +29,11 @@
 import axios from 'axios'
 
 export default {
+  data () {
+    return {
+      collapseid: null
+    }
+  },
   name: 'LinkDisplay',
   props: {
     link: {
@@ -38,6 +43,7 @@ export default {
   created: function () {
     console.log('In LinksDisplay now')
     console.log(this.link)
+    this.getCollapseID()
   },
   methods: {
     deleteLink: function () {
@@ -46,6 +52,12 @@ export default {
       .then(function (response) {
         console.log('link deleted')
       })
+    },
+    getCollapseID: function () {
+      var tmpid = this._uid
+      this.collapseid = tmpid + 'collapse'
+      console.log('collapseid')
+      console.log(this.collapseid)
     }
   }
 }

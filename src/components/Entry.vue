@@ -2,6 +2,7 @@
   <div class="entry">
     <h2>Links</h2>
     <links-view :links="links"></links-view>
+    <p v-if="links.length == 0">No links to display</p>
     <b-button-group class="mngbtn">
       <b-button v-on:click="getLinks" variant="info">Refresh Links</b-button>
       <b-button v-b-modal.modaludp variant="primary">Add UDP</b-button>

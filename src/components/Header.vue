@@ -37,7 +37,6 @@ export default {
   },
   methods: {
     checkConn: function () {
-      console.log('checking connection')
       var vm = this
       axios.get('http://localhost:8000/heartbeat')
         .then(function (response) {
