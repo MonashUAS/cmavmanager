@@ -1,7 +1,7 @@
 <template>
   <div class="link-con">
   <b-list-group>
-    <link-display v-for="link in links" :link="link">
+    <link-display v-for="link in links" :link="link" @emitRefresh="emitRefresh">
     </link-display>
   </b-list-group>
   </div>
@@ -22,6 +22,12 @@ export default {
   created: function () {
     console.log('In Linksview now')
     console.log(this.links)
+  },
+  methods: {
+    emitRefresh: function (id) {
+      console.log('emitrefresh')
+      this.$emit('emitRefresh')
+    }
   }
 }
 </script>

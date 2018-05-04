@@ -91,6 +91,10 @@ export default {
         axios.post('http://localhost:8000/links', this.form)
           .then(function (response) {
             console.log('seems to have worked')
+            this.$emit('emitRefresh')
+          }.bind(this))
+          .catch(err => {
+            console.log(err)
           })
       }
     },

@@ -51,7 +51,8 @@ export default {
       axios.delete('http://localhost:8000/links/' + this.link.id)
       .then(function (response) {
         console.log('link deleted')
-      })
+        this.$emit('emitRefresh')
+      }.bind(this))
     },
     getCollapseID: function () {
       var tmpid = this._uid

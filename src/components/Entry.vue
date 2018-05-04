@@ -1,7 +1,7 @@
 <template>
   <div class="entry">
     <h2>Links</h2>
-    <links-view :links="links"></links-view>
+    <links-view :links="links" @emitRefresh="emitRefresh"></links-view>
     <p v-if="links.length == 0">No links to display</p>
     <b-button-group class="mngbtn">
       <b-button v-on:click="getLinks" variant="info">Refresh Links</b-button>
@@ -10,7 +10,7 @@
       <b-button variant="success">Load from File</b-button>
   </b-button-group>
 
-  <add-link></add-link>
+  <add-link @emitRefresh="emitRefresh"></add-link>
 
   </div>
 </template>
@@ -33,6 +33,10 @@ export default {
     this.getLinks()
   },
   methods: {
+    emitRefresh: function (id) {
+      console.log('emitrefresh')
+      this.getLinks()
+    },
     getLinks: function () {
       var vm = this
       axios.get('http://localhost:8000/links')
