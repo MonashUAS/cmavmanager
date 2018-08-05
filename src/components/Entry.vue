@@ -59,6 +59,9 @@ export default {
       axios.get('http://localhost:8000/mapping')
         .then(function (response) {
           vm.mapping = response.data.mapping
+          if (vm.mapping.length === 0) {
+            vm.mapping = []
+          }
           console.log('Mapping')
           console.log(vm.mapping)
         })
