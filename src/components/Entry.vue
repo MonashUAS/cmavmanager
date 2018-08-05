@@ -8,6 +8,8 @@
     <mapping :mapping="mapping" @emitRefresh="emitRefresh"></mapping>
     <br>
     <h2>Routing Table</h2>
+    <routing :routing_table="routing_table" @emitRefresh="emitRefresh"></routing>
+    <br>
     <b-button-group class="mngbtn">
       <b-button v-on:click="getLinks" variant="info">Refresh Links</b-button>
       <b-button v-b-modal.modaludp variant="primary">Add UDP</b-button>
@@ -25,34 +27,38 @@ import axios from 'axios'
 import VueBootstrapTable from 'vue2-bootstrap-table2'
 import LinksView from '@/components/LinksView'
 import Mapping from '@/components/Mapping'
+import Routing from '@/components/Routing'
 import AddLink from '@/components/AddLink'
 
 export default {
   name: 'Entry',
-  components: { LinksView, Mapping, AddLink, VueBootstrapTable: VueBootstrapTable },
+  components: { LinksView, Mapping, Routing, AddLink, VueBootstrapTable: VueBootstrapTable },
   data () {
     return {
       links: [],
-      mapping: []
+      mapping: [],
+      routing_table: []
     }
   },
   created: function () {
     this.getLinks()
     this.getMapping()
+    this.getRouting()
   },
   methods: {
     emitRefresh: function (id) {
       console.log('emitrefresh')
       this.getLinks()
       this.getMapping()
+      this.getRouting()
     },
     getLinks: function () {
       var vm = this
       axios.get('http://localhost:8000/links')
-      .then(function (response) {
-        vm.links = response.data.links
-        console.log(vm.links)
-      })
+        .then(function (response) {
+          vm.links = response.data.links
+          console.log(vm.links)
+        })
     },
     getMapping: function () {
       var vm = this
@@ -64,6 +70,18 @@ export default {
           }
           console.log('Mapping')
           console.log(vm.mapping)
+        })
+    },
+    getRouting: function () {
+      var vm = this
+      axios.get('http://localhost:8000/routing')
+        .then(function (response) {
+          vm.routing_table = response.data.routing
+          if (vm.routing_table.length === 0) {
+            vm.routing_table = []
+          }
+          console.log('Routing')
+          console.log(vm.routing_table)
         })
     }
   }
