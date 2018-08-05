@@ -5,32 +5,9 @@
     <p v-if="links.length == 0">No links to display</p>
     <br>
     <h2>SYSID Mapping</h2>
-    <vue-bootstrap-table
-            :columns="columns"
-            :values="values"
-            :show-filter="e"
-            :show-column-picker="false"
-            :sortable="false"
-            :paginated="false"
-            :multi-column-sortable=false
-            :filter-case-sensitive=false
-
-    >
-    </vue-bootstrap-table>
+    <mapping :mapping="mapping" @emitRefresh="emitRefresh"></mapping>
     <br>
     <h2>Routing Table</h2>
-    <vue-bootstrap-table
-            :columns="columns2"
-            :values="values2"
-            :show-filter="e"
-            :show-column-picker="false"
-            :sortable="false"
-            :paginated="false"
-            :multi-column-sortable=false
-            :filter-case-sensitive=false
-
-    >
-    </vue-bootstrap-table>
     <b-button-group class="mngbtn">
       <b-button v-on:click="getLinks" variant="info">Refresh Links</b-button>
       <b-button v-b-modal.modaludp variant="primary">Add UDP</b-button>
@@ -47,83 +24,27 @@
 import axios from 'axios'
 import VueBootstrapTable from 'vue2-bootstrap-table2'
 import LinksView from '@/components/LinksView'
+import Mapping from '@/components/Mapping'
 import AddLink from '@/components/AddLink'
 
 export default {
   name: 'Entry',
-  components: { LinksView, AddLink, VueBootstrapTable: VueBootstrapTable },
+  components: { LinksView, Mapping, AddLink, VueBootstrapTable: VueBootstrapTable },
   data () {
     return {
       links: [],
-      columns: [
-        {
-          title: 'Source',
-          visible: true,
-          editable: true
-        },
-        {
-          title: 'Dest',
-          visible: true,
-          editable: true
-        }
-      ],
-      columns2: [
-        {
-          title: 'Dest',
-          visible: true,
-          editable: true
-        },
-        {
-          title: 'Next Hop',
-          visible: true,
-          editable: true
-        }
-      ],
-      values: [
-        {
-          'Source': 1,
-          'Dest': 255
-        },
-        {
-          'Source': 255,
-          'Dest': 1
-        },
-        {
-          'Source': 2,
-          'Dest': 254
-        },
-        {
-          'Source': 245,
-          'Dest': 2
-        }
-      ],
-      values2: [
-        {
-          'Dest': 1,
-          'Next Hop': 0
-        },
-        {
-          'Dest': 2,
-          'Next Hop': 0
-        },
-        {
-          'Dest': 255,
-          'Next Hop': 1
-        },
-        {
-          'Dest': 254,
-          'Next Hop': 2
-        }
-      ]
+      mapping: []
     }
   },
   created: function () {
     this.getLinks()
+    this.getMapping()
   },
   methods: {
     emitRefresh: function (id) {
       console.log('emitrefresh')
       this.getLinks()
+      this.getMapping()
     },
     getLinks: function () {
       var vm = this
@@ -132,6 +53,15 @@ export default {
         vm.links = response.data.links
         console.log(vm.links)
       })
+    },
+    getMapping: function () {
+      var vm = this
+      axios.get('http://localhost:8000/mapping')
+        .then(function (response) {
+          vm.mapping = response.data.mapping
+          console.log('Mapping')
+          console.log(vm.mapping)
+        })
     }
   }
 }
