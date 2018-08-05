@@ -3,6 +3,14 @@
     <h2>Links</h2>
     <links-view :links="links" @emitRefresh="emitRefresh"></links-view>
     <p v-if="links.length == 0">No links to display</p>
+    <b-button-group class="mngbtn">
+      <b-button v-on:click="getLinks" variant="info">Refresh Links</b-button>
+      <b-button v-b-modal.modaludp variant="primary">Add UDP</b-button>
+      <b-button v-b-modal.modalserial variant="primary">Add Serial</b-button>
+      <b-button variant="danger">Save to File</b-button>
+      <b-button variant="success">Load from File</b-button>
+    </b-button-group>
+    <br>
     <br>
     <h2>SYSID Mapping</h2>
     <mapping :mapping="mapping" @emitRefresh="emitRefresh"></mapping>
@@ -10,14 +18,9 @@
     <h2>Routing Table</h2>
     <routing :routing_table="routing_table" @emitRefresh="emitRefresh"></routing>
     <br>
-    <b-button-group class="mngbtn">
-      <b-button v-on:click="getLinks" variant="info">Refresh Links</b-button>
-      <b-button v-b-modal.modaludp variant="primary">Add UDP</b-button>
-      <b-button variant="danger">Save to File</b-button>
-      <b-button variant="success">Load from File</b-button>
-  </b-button-group>
 
   <add-link @emitRefresh="emitRefresh"></add-link>
+  <add-serial @emitRefresh="emitRefresh"></add-serial>
 
   </div>
 </template>
@@ -29,10 +32,11 @@ import LinksView from '@/components/LinksView'
 import Mapping from '@/components/Mapping'
 import Routing from '@/components/Routing'
 import AddLink from '@/components/AddLink'
+import AddSerial from '@/components/AddSerial'
 
 export default {
   name: 'Entry',
-  components: { LinksView, Mapping, Routing, AddLink, VueBootstrapTable: VueBootstrapTable },
+  components: { LinksView, Mapping, Routing, AddLink, AddSerial, VueBootstrapTable: VueBootstrapTable },
   data () {
     return {
       links: [],

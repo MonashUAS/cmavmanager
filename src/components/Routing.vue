@@ -4,6 +4,7 @@
       <b-row class="route-item">
         <b-col>Dest</b-col>
         <b-col>Next Hop</b-col>
+        <b-col>Delete</b-col>
       </b-row>
       <b-row class="route-item" v-for="route in routing_table">
         <b-col>

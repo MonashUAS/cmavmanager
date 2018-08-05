@@ -5,6 +5,7 @@
         <b-col>Source</b-col>
         <b-col>Dest</b-col>
         <b-col>Bidir</b-col>
+        <b-col>Delete</b-col>
       </b-row>
       <b-row class="map-item" v-for="map in mapping">
         <b-col>
