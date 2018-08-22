@@ -35,9 +35,15 @@
 <script>
 
 import axios from 'axios'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Routing',
+  computed: {
+    ...mapGetters([
+      'cmav_addr'
+    ])
+  },
   props: {
     routing_table: {
       type: Array
@@ -69,7 +75,7 @@ export default {
           return
         }
       }
-      axios.post('http://localhost:8000/routing', this.routing_table)
+      axios.post(this.cmav_addr + '/routing', this.routing_table)
         .then(function (response) {
           console.log('successful push routing')
           this.$emit('emitRefresh')

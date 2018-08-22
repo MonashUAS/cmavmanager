@@ -35,6 +35,7 @@
 <script>
 
 import axios from 'axios'
+import { mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -51,6 +52,11 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapGetters([
+      'cmav_addr'
+    ])
+  },
   methods: {
     hopen: function (event) {
       if (event) {
@@ -65,7 +71,7 @@ export default {
       if (event) {
         console.log('Adding Serial Link')
         console.log(JSON.stringify(this.form))
-        axios.post('http://localhost:8000/links', this.form)
+        axios.post(this.cmav_addr + '/links', this.form)
           .then(function (response) {
             console.log('seems to have worked')
             this.$emit('emitRefresh')

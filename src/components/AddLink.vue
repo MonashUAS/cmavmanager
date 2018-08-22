@@ -48,8 +48,14 @@
 <script>
 
 import axios from 'axios'
+import { mapGetters } from 'vuex'
 
 export default {
+  computed: {
+    ...mapGetters([
+      'cmav_addr'
+    ])
+  },
   data () {
     return {
       form: {
@@ -87,8 +93,9 @@ export default {
     hok: function (event) {
       if (event) {
         console.log('Adding UDP Link')
+        console.log(this.cmav_addr + '/links')
         console.log(JSON.stringify(this.form))
-        axios.post('http://localhost:8000/links', this.form)
+        axios.post(this.cmav_addr + '/links', this.form)
           .then(function (response) {
             console.log('seems to have worked')
             this.$emit('emitRefresh')

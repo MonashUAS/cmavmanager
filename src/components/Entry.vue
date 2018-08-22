@@ -33,10 +33,16 @@ import Mapping from '@/components/Mapping'
 import Routing from '@/components/Routing'
 import AddLink from '@/components/AddLink'
 import AddSerial from '@/components/AddSerial'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Entry',
   components: { LinksView, Mapping, Routing, AddLink, AddSerial, VueBootstrapTable: VueBootstrapTable },
+  computed: {
+    ...mapGetters([
+      'cmav_addr'
+    ])
+  },
   data () {
     return {
       links: [],
@@ -58,7 +64,7 @@ export default {
     },
     getLinks: function () {
       var vm = this
-      axios.get('http://localhost:8000/links')
+      axios.get(this.cmav_addr + '/links')
         .then(function (response) {
           vm.links = response.data.links
           console.log(vm.links)
@@ -66,7 +72,7 @@ export default {
     },
     getMapping: function () {
       var vm = this
-      axios.get('http://localhost:8000/mapping')
+      axios.get(this.cmav_addr + '/mapping')
         .then(function (response) {
           vm.mapping = response.data.mapping
           if (vm.mapping.length === 0) {
@@ -78,7 +84,7 @@ export default {
     },
     getRouting: function () {
       var vm = this
-      axios.get('http://localhost:8000/routing')
+      axios.get(this.cmav_addr + '/routing')
         .then(function (response) {
           vm.routing_table = response.data.routing
           if (vm.routing_table.length === 0) {

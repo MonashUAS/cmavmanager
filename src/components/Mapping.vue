@@ -39,9 +39,15 @@
 <script>
 
 import axios from 'axios'
+import { mapGetters} from 'vuex'
 
 export default {
   name: 'Mapping',
+  computed: {
+    ...mapGetters([
+      'cmav_addr'
+    ])
+  },
   props: {
     mapping: {
       type: Array
@@ -77,7 +83,7 @@ export default {
           return
         }
       }
-      axios.post('http://localhost:8000/mapping', this.mapping)
+      axios.post(this.cmav_addr + '/mapping', this.mapping)
         .then(function (response) {
           console.log('successful push mapping')
           this.$emit('emitRefresh')

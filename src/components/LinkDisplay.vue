@@ -28,6 +28,7 @@
 
 <script>
 import axios from 'axios'
+import { mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -36,6 +37,11 @@ export default {
     }
   },
   name: 'LinkDisplay',
+  computed: {
+    ...mapGetters([
+      'cmav_addr'
+    ])
+  },
   props: {
     link: {
       type: Object
@@ -49,7 +55,7 @@ export default {
   methods: {
     deleteLink: function () {
       console.log('deleteing this link')
-      axios.delete('http://localhost:8000/links/' + this.link.id)
+      axios.delete(this.cmav_addr + '/links/' + this.link.id)
       .then(function (response) {
         console.log('link deleted')
         this.$emit('emitRefresh')
