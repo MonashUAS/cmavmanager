@@ -28,11 +28,11 @@
         </b-form-checkbox>
         </b-form-group>
         <b-form-group id="bem"
-                      label="Block Xmit" label-for="beminput">
-        <b-form-checkbox id="bemtypeinput1" v-model="form.link_options.blockXmitRx" value="true" unchecked-value="false">
+                      label="Block Xmit" label-for="beminput2">
+        <b-form-checkbox id="bemtypeinput21" v-model="form.link_options.blockXmitRx" value="true" unchecked-value="false">
           Rx
         </b-form-checkbox>
-        <b-form-checkbox id="bemtypeinput2" v-model="form.link_options.blockXmitTx" value="true" unchecked-value="false">
+        <b-form-checkbox id="bemtypeinput22" v-model="form.link_options.blockXmitTx" value="true" unchecked-value="false">
           Tx
         </b-form-checkbox>
         </b-form-group>
