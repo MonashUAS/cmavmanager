@@ -2,11 +2,11 @@
     <b-list-group-item>
       <div class="wrapperlink">
         <div v-if="link.udp_properties" class="llink">
-        <p><strong>UDP Link#</strong> {{ link.id }} <strong>Name:</strong> {{ link.link_options.link_name }}</p>
+        <p><strong>UDP Link#</strong> {{ link.id }} <strong>Name:</strong> {{ link.link_options.link_name }} <strong>blockXmitRx:</strong> {{ link.link_options.blockXmitRx }} <strong>blockXmitTx:</strong> {{ link.link_options.blockXmitTx }}</p>
         <p><strong>Host:</strong> {{ link.udp_properties.host }} <strong>Host Port:</strong> {{ link.udp_properties.hostport }} <strong>Bind Port:</strong> {{ link.udp_properties.bindport }}</p>
         </div>
         <div v-if="link.serial_properties" class="llink">
-        <p><strong>Serial Link#</strong> {{ link.id }} <strong>Name:</strong> {{ link.link_options.link_name }}</p>
+        <p><strong>Serial Link#</strong> {{ link.id }} <strong>Name:</strong> {{ link.link_options.link_name }} <strong>blockXmitRx:</strong> {{ link.link_options.blockXmitRx }} <strong>blockXmitTx:</strong> {{ link.link_options.blockXmitTx }}</p>
         <p><strong>Port:</strong> {{ link.serial_properties.port }} <strong>Baudrate:</strong> {{ link.serial_properties.baudrate }} <strong>Flowcontrol:</strong> {{ link.serial_properties.flowcontrol }}</p>
         </div>
 

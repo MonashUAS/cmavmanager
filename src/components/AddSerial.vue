@@ -27,6 +27,15 @@
         <b-form-checkbox id="flowcontrolinput" v-model="form.serial_properties.flowcontrol">
         </b-form-checkbox>
         </b-form-group>
+        <b-form-group id="bem"
+                      label="Block Xmit" label-for="beminput">
+        <b-form-checkbox id="bemtypeinput1" v-model="form.link_options.blockXmitRx" value="true" unchecked-value="false">
+          Rx
+        </b-form-checkbox>
+        <b-form-checkbox id="bemtypeinput2" v-model="form.link_options.blockXmitTx" value="true" unchecked-value="false">
+          Tx
+        </b-form-checkbox>
+        </b-form-group>
       </b-form>
     </b-modal>
     </div>
@@ -42,7 +51,9 @@ export default {
     return {
       form: {
         link_options: {
-          link_name: ''
+          link_name: '',
+          blockXmitRx: 'false',
+          blockXmitTx: 'false'
         },
         serial_properties: {
           port: '',
@@ -61,6 +72,8 @@ export default {
     hopen: function (event) {
       if (event) {
         this.form.link_options.link_name = ''
+        this.form.link_options.blockXmitRx = 'false'
+        this.form.link_options.blockXmitTx = 'false'
         this.form.serial_properties.port = ''
         this.form.serial_properties.baudrate = ''
         this.form.serial_properties.flowcontrol = 'false'
