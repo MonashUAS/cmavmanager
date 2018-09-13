@@ -13,7 +13,7 @@
           </b-form-input></b-col>
         <b-col>
           <b-form-input v-model="route.next_hop"
-                        type="number">
+                        type="text">
           </b-form-input></b-col>
         <b-col><b-button @click="deleteItem(route)" size="sm" variant="danger">Delete</b-button>
           </b-col>

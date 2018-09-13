@@ -75,7 +75,12 @@ export default {
         })
     },
     saveFile: function () {
-      var blob = new Blob([JSON.stringify(this.links, null, 4)], {type: 'text/plain;charset=utf-8'})
+      var allthings = {
+        links: this.links,
+        mapping: this.mapping,
+        routing_table: this.routing_table
+      }
+      var blob = new Blob([JSON.stringify(allthings, null, 4)], {type: 'text/plain;charset=utf-8'})
       saveAs(blob, 'links.txt')
     },
     loadFile: function () {
@@ -84,7 +89,10 @@ export default {
       reader.readAsText(this.file)
     },
     addFromFile: function (lJson) {
-      var lObj = JSON.parse(lJson)
+      var allObj = JSON.parse(lJson)
+      var lObj = allObj.links
+      this.mapping = allObj.mapping
+      this.routing_table = allObj.routing_table
       console.log(lObj)
       for (var i = 0; i < lObj.length; i++) {
         axios.post(this.cmav_addr + '/links', lObj[i])
