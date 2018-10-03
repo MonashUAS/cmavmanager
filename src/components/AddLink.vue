@@ -71,7 +71,9 @@ export default {
         link_options: {
           link_name: '',
           blockXmitRx: 'false',
-          blockXmitTx: 'false'
+          blockXmitTx: 'false',
+          sik_radio: 'false',
+          reject_repeat_packets: 'false'
         },
         udp_properties: {
           host: '',
