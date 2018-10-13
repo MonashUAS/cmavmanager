@@ -4,7 +4,7 @@
       <b-nav-toggle target="nav_collapse"></b-nav-toggle>
 
       <b-navbar-brand href="#">
-        <img src="/open-iconic/svg/signal.svg" width="50px" height="50px" alt="signal"></img>
+        <img src="../assets/newlogo.png" width="50px" height="50px" alt="signal"></img>
       </b-navbar-brand>
       <b-navbar-brand href="#">
         <h2>cmavmanager</h2>
