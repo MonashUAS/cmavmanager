@@ -18,10 +18,14 @@
             </b-dropdown>
         </div>
       </div>
-      <b-collapse :id="collapseid" class="mt-2">
-        <b-card>
-          <p class="card-text">Stats Will Go Here</p>
-        </b-card>
+      <b-collapse :id="collapseid" class="mt-2" style="align: left">
+        <br>
+        <br>
+        <GChart
+          type="LineChart"
+          :data="chartData"
+          :options="chartOptions.chart"
+        />
       </b-collapse>
     </b-list-group-item>
 </template>
@@ -29,11 +33,34 @@
 <script>
 import axios from 'axios'
 import { mapGetters } from 'vuex'
+import { GChart } from 'vue-google-charts'
 
 export default {
+  components: {
+    GChart
+  },
   data () {
     return {
-      collapseid: null
+      collapseid: null,
+      counter: 0,
+      chartData: [
+        ['id', 'bandwidth'],
+        [0, 0]
+      ],
+      chartOptions: {
+        chart: {
+          title: 'Bandwidth',
+          width: 800,
+          height: 200,
+          legend: 'none',
+          hAxis: {
+            title: 'Time (s)'
+          },
+          vAxis: {
+            title: 'Bytes per Second'
+          }
+        }
+      }
     }
   },
   name: 'LinkDisplay',
@@ -50,9 +77,22 @@ export default {
   created: function () {
     console.log('In LinksDisplay now')
     console.log(this.link)
+    this.timer = setInterval(this.getStats, 1000)
     this.getCollapseID()
   },
   methods: {
+    getStats: function () {
+      var vm = this
+      axios.get('http://localhost:8000/stats')
+        .then(function (response) {
+          for (var i = 0; i < response.data.stats.length; i++) {
+            if (response.data.stats[i].name === vm.link.link_options.link_name) {
+              var tmp = [vm.counter++, response.data.stats[i].drate_rx]
+              vm.chartData.push(tmp)
+            }
+          }
+        })
+    },
     deleteLink: function () {
       console.log('deleteing this link')
       axios.delete(this.cmav_addr + '/links/' + this.link.id)
