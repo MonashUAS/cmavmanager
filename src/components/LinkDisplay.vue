@@ -11,6 +11,7 @@
         </div>
 
         <div class="rlink">
+          <br>
           <b-btn v-b-toggle="collapseid" variant="primary">View Stats</b-btn>
           <b-dropdown id="ddown" text="Actions" variant="primary" class="m-md-2">
               <b-dropdown-item>Edit</b-dropdown-item>
@@ -50,7 +51,7 @@ export default {
       chartOptions: {
         chart: {
           title: 'Bandwidth',
-          width: 800,
+          width: 700,
           height: 200,
           legend: 'none',
           hAxis: {
@@ -87,8 +88,10 @@ export default {
         .then(function (response) {
           for (var i = 0; i < response.data.stats.length; i++) {
             if (response.data.stats[i].name === vm.link.link_options.link_name) {
-              var tmp = [vm.counter++, response.data.stats[i].drate_rx]
-              vm.chartData.push(tmp)
+              if (response.data.stats[i].drate_rx <= 10000) {
+                var tmp = [vm.counter++, response.data.stats[i].drate_rx]
+                vm.chartData.push(tmp)
+              }
             }
           }
         })
