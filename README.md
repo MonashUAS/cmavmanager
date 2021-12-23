@@ -1,6 +1,8 @@
 # cmavmanager
 
 > Cmavnode web Frontend
+> Not recommended for use as it was written in conjunction with a development branch of cmavnode that never got merged to master and contained customizations specific to the 2018 UAV challange.
+> Will not work with master cmavnode
 
 ## Build Setup
 
